@@ -21,10 +21,21 @@
     </ul>
     <!-- views/index.ejs -->
     <h1>Add a city</h1>
-    <form method="post" action="/cities">
+    <form method="post" action="/citiesWithValidation">
       <div class="mb-3">
         <label for="city" class="form-label">City</label>
-        <input type="text" class="form-control" id="city" name="city" />
+        <input type="text" class=="form-control <%= typeof errors != 'undefined' && errors.length > 0 ? 'is-invalid': '' %>"
+ id="city" name="city" value="<%= typeof city !== 'undefined' ? city : '' %>" aria-describedby="validationServerFeedback"/>
+ <label for="city" class="form-label">City 2</label>
+        <input type="text" class=="form-control <%= typeof errors != 'undefined' && errors.length > 0 ? 'is-invalid': '' %>"
+ id="city2" name="city2" value="<%= typeof city !== 'undefined' ? city2 : '' %>" aria-describedby="validationServerFeedback2"/>
+      <div>
+        <% if (typeof errors != 'undefined' && errors.length > 0) { 
+     errors.forEach((error) => { %>
+        <p><%= error.msg %></p>
+<%   }); 
+} %>
+      </div>      
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>

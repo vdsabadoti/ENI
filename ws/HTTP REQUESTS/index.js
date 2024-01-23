@@ -51,6 +51,7 @@ app.get('/form', function (req, res) {
 //post request to deal with the submition of the form
 app.post('/cities', (req, res) => {
     cities.push(req.body.city);
+    console.log(req);
     res.redirect("/cities");
 });
 
@@ -63,3 +64,4 @@ app.delete('/cities');
 // ANY OTHER REQUEST THAT MIGHT NOT BE YET OR NEVER WILL BE ROUTED => ERROR 404 PAGE NOT FOUND
 app.use((req,res)=>
 res.status(404).send('Error 404 : error page not found'));
+
