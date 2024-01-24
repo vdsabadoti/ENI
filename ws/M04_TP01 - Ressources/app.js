@@ -7,6 +7,10 @@ const sassMiddleware = require('node-sass-middleware')
 const indexRouter = require('./routes/index.js');
 const connexionRouter = require('./routes/connexion.js')
 
+var mongo = require('mongodb')
+var monk = require('monk')
+var db_test = monk('localhost:27017/firstdbtest')
+
 const flash = require('connect-flash');
 const session = require("express-session");
 
@@ -42,6 +46,12 @@ app.use((req, res, next) => {
     res.locals.flashError = req.flash('error');
     res.locals.user = req.session.user;
     next();
+});
+
+//middleware : between requests, execute this function, more specifically AFTER the request (cause using NEXT)
+app.use(function(req,res,next){
+  req.db = db_test;
+  next();
 });
 
 //BEFORE ERRORS, AFTER CONFIG (APP.USE)

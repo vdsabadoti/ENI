@@ -6,7 +6,6 @@ const tryNumer = require('../services/try-number')
 let card = randomNumber.RandomNumber.generate()
 
 console.log(card)
-
 let nbOfTries = 0
 
 router.get('/', (req, res) => {
@@ -14,8 +13,15 @@ router.get('/', (req, res) => {
 })
 
 router.get('/try', (req, res) => {
+  console.log(req.session.pageViews);
+  if (req.session.pageViews) {
+    req.session.pageViews++
+    res.send('Hello World ! You visited this page ' + req.session.pageViews + ' times')
+  } else {
+    req.session.pageViews = 1
+    res.send('Hello World ! Welcome to this page for the first time!')
+  }
   console.log(req.body);
-  res.send('Hello World')
 })
 
 router.post('/try', (req, res) => {

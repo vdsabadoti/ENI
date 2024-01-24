@@ -16,17 +16,17 @@
             </li>
             <% if (typeof user !== "undefined" && user.role === 'admin') { %>
                 <li class="nav-item">
-                    <a class="nav-link" href="/users">Utilisateurs</a>
+                    <a class="nav-link" href="/ok">Utilisateurs</a>
                 </li>
             <% } %>
         </ul>
         <% if (typeof user === 'undefined') { %>
             <span class="navbar-text d-block w-100">
-                <a class="nav-link float-lg-end" href="/login">Connexion <i class="bi bi-person-circle"></i></a>
+                <a class="nav-link float-lg-end" href="/ok/connection">Connexion <i class="bi bi-person-circle"></i></a>
             </span>
         <% } else { %>
             <span class="navbar-text d-block w-100">
-                <a class="nav-link float-lg-end" href="/logout">Déconnexion <i class="bi bi-person-circle"></i></a>
+                <a class="nav-link float-lg-end" href="/ok/logout">Déconnexion <i class="bi bi-person-circle"></i></a>
             </span>
         <% } %>
     </div>

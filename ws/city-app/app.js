@@ -4,6 +4,10 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+var mongo = require('mongodb');
+var monk = require('monk');
+var db_test = monk('localhost:27017/firstdbtest')
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
@@ -19,6 +23,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//middleware : between requests, execute this function, more specifically AFTER the request (cause using NEXT)
+app.use(function(req,res,next){
+  req.db = db_test;
+  next();
+});
+
+//routes
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
