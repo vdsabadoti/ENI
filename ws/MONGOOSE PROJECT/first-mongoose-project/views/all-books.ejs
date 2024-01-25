@@ -1,0 +1,31 @@
+<!-- Latest compiled and minified CSS -->
+<link
+  rel="stylesheet"
+  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+/>
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<ul class="list-group list-group-light">
+  <% if (typeof books != 'undefined' && books.length > 0) { 
+    books.forEach((book) => { %>
+      <li class="list-group-item">
+        <%= book.title + ' is a ' + book.genre.label + ' book from ' + book.author.firstName + ' ' + book.author.lastName %>    
+        <br>
+        Reviews :
+        <% book.review.forEach((rev) => { %>
+          <%= rev.description + ', '%>
+        <% }); %> ...
+        <br>
+        <a href="<%= '/newreview?uuid=' + book.uuid %>">
+          Add a review for this book
+        </a>
+      </li>
+  <% }); } %>
+</ul>
+<br>
+<a href="/newbook">
+  Add a book to the list
+</a>
